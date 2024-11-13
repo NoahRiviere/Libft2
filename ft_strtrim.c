@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: norivier <norivier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/13 17:46:08 by norivier          #+#    #+#             */
+/*   Updated: 2024/11/13 17:46:09 by norivier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -22,11 +33,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!out)
 		return (0);
 	return (ft_memcpy(out, s1, end + 1));
-}
-
-int main(void)
-{
-	char	*yolo = "   Yes I am !                       ";
-
-	printf("|%s| -> |%s|\n", yolo, ft_strtrim(yolo, "  "));
 }

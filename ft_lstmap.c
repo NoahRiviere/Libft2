@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: norivier <norivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:44:56 by norivier          #+#    #+#             */
-/*   Updated: 2024/11/13 17:44:57 by norivier         ###   ########.fr       */
+/*   Created: 2024/11/13 17:44:38 by norivier          #+#    #+#             */
+/*   Updated: 2024/11/13 17:44:39 by norivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdint.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	uint8_t			*d;
-	const uint8_t	*s;
+	t_list	*map;
+	t_list	*new;
 
-	d = (uint8_t *)dest;
-	s = (const uint8_t *)src;
-	while (n >= 8)
+	if (!f || !del)
+		return (0);
+	map = 0;
+	while (lst)
 	{
-		*(uint64_t *)d = *(const uint64_t *)s;
-		d += 8;
-		s += 8;
-		n -= 8;
+		new = ft_lstnew(f(lst->content));
+		if (!new)
+		{
+			ft_lstclear(&map, del);
+			break ;
+		}
+		ft_lstadd_back(&map, new);
 	}
-	while (n--)
-		*d++ = *s++;
-	return (dest);
+	return (map);
 }

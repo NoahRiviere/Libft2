@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: norivier <norivier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:44:56 by norivier          #+#    #+#             */
-/*   Updated: 2024/11/13 17:44:57 by norivier         ###   ########.fr       */
+/*   Created: 2024/11/13 17:44:31 by norivier          #+#    #+#             */
+/*   Updated: 2024/11/13 17:44:31 by norivier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdint.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	uint8_t			*d;
-	const uint8_t	*s;
-
-	d = (uint8_t *)dest;
-	s = (const uint8_t *)src;
-	while (n >= 8)
+	if (!f)
+		return ;
+	while (lst)
 	{
-		*(uint64_t *)d = *(const uint64_t *)s;
-		d += 8;
-		s += 8;
-		n -= 8;
+		f(lst->content);
+		lst = lst->next;
 	}
-	while (n--)
-		*d++ = *s++;
-	return (dest);
 }
