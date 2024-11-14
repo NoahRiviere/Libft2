@@ -13,7 +13,7 @@ HIDE =
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g -I.
+CFLAGS	=	-Wall -Werror -Wextra -I.
 RM		=	rm -f
 
 # Main target name
@@ -60,6 +60,10 @@ $(BNAME): $(OBJS_B)
 
 $(OBJS) $(OBJS_B) : %.o : %.c $(INC)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
+
+#so:
+#	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS) $(SRCS_B)
+#	gcc -nostartfiles -shared -o libft.so $(OBJS) $(OBJS_B)
 
 clean:
 	$(HIDE)$(RM) $(OBJS) $(OBJS_B)

@@ -18,16 +18,22 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	uint8_t			*d;
 	const uint8_t	*s;
 
+	if (!dest && !src)
+		return (0);
 	d = (uint8_t *)dest;
 	s = (const uint8_t *)src;
 	if (d < s)
 		return (ft_memcpy(dest, src, n));
-	while (n >= 8)
+	d += n;
+	s += n;
+	while (n >= sizeof(uint64_t))
 	{
-		((uint64_t *)d)[n] = ((const uint64_t *)s)[n];
-		n -= 8;
+		d -= sizeof(uint64_t);
+		s -= sizeof(uint64_t);
+		n -= sizeof(uint64_t);
+		*(uint64_t *)d = *(uint64_t *)s;
 	}
 	while (n--)
-		d[n] = s[n];
+		*--d = *--s;
 	return (dest);
 }
