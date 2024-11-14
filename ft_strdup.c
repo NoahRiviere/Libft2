@@ -11,21 +11,29 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 #include <stdlib.h>
 
 char	*ft_strdup(const char *s)
 {
-	char	*out;
-	int		len;
+	char	*d;
+	char	*d_start;
+	size_t	s_len;
 
-	len = ft_strlen(s);
-	out = malloc(sizeof(char) * (len + 1));
-	if (!out)
+	s_len = ft_strlen(s);
+	d = malloc(sizeof(char) * (s_len + 1));
+	if (!d)
 		return (0);
-	while (len > -1)
+	d_start = d;
+	while (s_len >= sizeof(uint64_t))
 	{
-		out[len] = s[len];
-		len--;
+		*(uint64_t *)d = *(const uint64_t *)s;
+		d += sizeof(uint64_t);
+		s += sizeof(uint64_t);
+		s_len -= sizeof(uint64_t);
 	}
-	return (out);
+	while (s_len-- > 0)
+		*d++ = *s++;
+	*d = 0;
+	return (d_start);
 }

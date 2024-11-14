@@ -14,8 +14,8 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (dst[i] && i < siz)

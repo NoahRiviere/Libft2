@@ -11,20 +11,29 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	int	i;
+	size_t	cpy_len;
+	size_t	src_len;
 
-	if (siz > 0)
+	src_len = ft_strlen(src);
+	if (siz == 0)
+		return (src_len);
+	if (src_len < siz - 1)
+		cpy_len = src_len;
+	else
+		cpy_len = siz - 1;
+	while (cpy_len >= sizeof(uint64_t))
 	{
-		i = 0;
-		while (src[i] && i < siz - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = 0;
+		*(uint64_t *)dst = *(const uint64_t *)src;
+		dst += 8;
+		src += 8;
+		cpy_len -= 8;
 	}
-	return (ft_strlen(src));
+	while (cpy_len-- > 0)
+		*dst++ = *src++;
+	*dst = 0;
+	return (src_len);
 }
