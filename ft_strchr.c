@@ -20,7 +20,7 @@ char	*ft_strchr(const char *s, int c)
 
 	while ((uintptr_t)s % sizeof(uint64_t) != 0)
 	{
-		if ((uint8_t)*s == (uint8_t)c)
+		if (*(uint8_t *)s == (uint8_t)c)
 			return ((char *)s);
 		if (*s++ == 0)
 			return (0);
@@ -36,9 +36,7 @@ char	*ft_strchr(const char *s, int c)
 		s += sizeof(uint64_t);
 	}
 	while (*s)
-		if ((uint8_t)*s++ == (uint8_t)c)
+		if (*(uint8_t *)s++ == (uint8_t)c)
 			return ((char *)(s - 1));
-	if ((uint8_t)*s == (uint8_t)c)
-		return ((char *)s);
-	return (0);
+	return ((char *)((uintptr_t)s * (*(uint8_t *)s == (uint8_t)c)));
 }

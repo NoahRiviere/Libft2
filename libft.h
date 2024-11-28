@@ -17,7 +17,6 @@
 # define BYTE_MASK_64 0x0101010101010101ULL
 # define HIGH_BIT_MASK_64 0x8080808080808080ULL
 
-
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

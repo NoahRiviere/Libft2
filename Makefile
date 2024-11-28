@@ -4,7 +4,7 @@
 
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 HIDE = 
 
 #-------------------------------------------------------------------------------#
@@ -53,10 +53,10 @@ all: $(NAME)
 
 # Main target rule
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $?
+	ar -rcs $@ $^
 
 $(BNAME): $(OBJS_B)
-	ar -rcs $(NAME) $(OBJS_B)
+	ar -rcs $(NAME) $^
 
 $(OBJS) $(OBJS_B) : %.o : %.c $(INC)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
